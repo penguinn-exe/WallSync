@@ -1,26 +1,29 @@
 import sqlite3
-from pathlib import Path
 
+from wallsync.config import Config
 
-DB_PATH = Path.home() / ".local/share/wallsync/wallsync.db"
+config = Config()
 
 
 def connect():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    config.database.parent.mkdir(parents=True, exist_ok=True)
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(config.database)
 
     conn.execute("""
-    CREATE TABLE IF NOT EXISTS wallpapers(
+    CREATE TABLE IF NOT EXISTS wallpapers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        path TEXT UNIQUE,
-        filename TEXT,
-        extension TEXT,
-        size INTEGER,
-        width INTEGER,
-        height INTEGER,
+        path TEXT UNIQUE NOT NULL,
+        filename TEXT NOT NULL,
+        extension TEXT NOT NULL,
+        size INTEGER NOT NULL,
+        width INTEGER NOT NULL,
+        height INTEGER NOT NULL,
+        sha256 TEXT NOT NULL,
         last_shown TIMESTAMP,
-        sha256 TEXT
+        times_shown INTEGER NOT NULL DEFAULT 0,
+        favorite INTEGER NOT NULL DEFAULT 0,
+        rating INTEGER NOT NULL DEFAULT 0
     );
     """)
 

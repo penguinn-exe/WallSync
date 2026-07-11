@@ -3,6 +3,7 @@ from pathlib import Path
 
 from PIL import Image
 
+from wallsync.indexer import build_index
 from wallsync.models import CollectionStats
 
 SUPPORTED_EXTENSIONS = {
@@ -61,9 +62,7 @@ def run(directory: str):
 
         try:
             with Image.open(item) as img:
-                resolution = f"{img.width}x{img.height}"
-                stats.resolutions[resolution] += 1
-
+                stats.resolutions[f"{img.width}x{img.height}"] += 1
         except Exception:
             stats.corrupted += 1
 
@@ -87,3 +86,6 @@ def run(directory: str):
     print("------------------")
     for resolution, count in stats.resolutions.most_common(10):
         print(f"{resolution:<15}{count}")
+
+    print("\nBuilding database...")
+    build_index(path)
