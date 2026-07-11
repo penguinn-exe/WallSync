@@ -5,8 +5,50 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wallsync"
 version = "0.1.0"
-description = "Cloud-backed wallpaper synchronization tool"
+description = "A minimal Google Drive-backed wallpaper rotator for GNOME."
+readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+
+authors = [
+    { name = "penguin" }
+]
+
+dependencies = [
+    "google-api-python-client",
+    "google-auth",
+    "google-auth-oauthlib",
+]
+
+keywords = [
+    "wallpaper",
+    "gnome",
+    "google-drive",
+    "linux",
+    "cli",
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Desktop Environment",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/penguinn-exe/WallSync"
+Repository = "https://github.com/penguinn-exe/WallSync"
+Issues = "https://github.com/penguinn-exe/WallSync/issues"
+
+[project.scripts]
+wallsync = "wallsync.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+wallsync = ["credentials.json"]
