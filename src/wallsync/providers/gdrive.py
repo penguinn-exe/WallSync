@@ -10,12 +10,19 @@ from googleapiclient.http import (
     MediaIoBaseDownload,
 )
 
+from wallsync import config
+from wallsync import config
+from wallsync.config import Config
+
 
 class GoogleDriveProvider:
     SCOPES = ["https://www.googleapis.com/auth/drive"]
 
     def __init__(self):
-        token_file = Path.home() / ".config" / "wallsync" / "token.json"
+        from wallsync.config import Config
+
+        config = Config()
+        token_file = config.token
 
         self.creds = Credentials.from_authorized_user_file(
             token_file,

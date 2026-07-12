@@ -10,9 +10,13 @@ RESET = "\033[0m"
 
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 
-CONFIG_DIR = Path.home() / ".config" / "wallsync"
-CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+from wallsync.config import Config
 
+config = Config()
+
+CONFIG_DIR = config.credentials.parent
+
+CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 CREDENTIALS = CONFIG_DIR / "credentials.json"
 TOKEN = CONFIG_DIR / "token.json"
 

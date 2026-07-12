@@ -4,7 +4,10 @@ from pathlib import Path
 from wallsync.commands.next import run as next_wallpaper
 from wallsync.providers.gdrive import GoogleDriveProvider
 
-CACHE = Path.home() / ".cache" / "wallsync"
+from wallsync.config import Config
+
+config = Config()
+CACHE = config.cache_dir
 STATE = CACHE / "state.json"
 
 

@@ -1,18 +1,31 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+
+from .platform.paths import (
+    wallpaper_dir,
+    cache_dir,
+    config_dir,
+    data_dir,
+)
 
 
 @dataclass
 class Config:
-    wallpaper_dir: Path = Path.home() / "Pictures/random/wallpaper_repo"
+    wallpaper_dir: Path = field(default_factory=wallpaper_dir)
 
-    cache_dir: Path = Path.home() / ".cache/wallsync"
+    cache_dir: Path = field(default_factory=cache_dir)
 
-    database: Path = Path.home() / ".local/share/wallsync/wallsync.db"
+    database: Path = field(
+        default_factory=lambda: data_dir() / "wallsync.db"
+    )
 
-    credentials: Path = Path.home() / ".config/wallsync/credentials.json"
+    credentials: Path = field(
+        default_factory=lambda: config_dir() / "credentials.json"
+    )
 
-    token: Path = Path.home() / ".config/wallsync/token.json"
+    token: Path = field(
+        default_factory=lambda: config_dir() / "token.json"
+    )
 
     provider: str = "local"
 

@@ -5,7 +5,10 @@ from pathlib import Path
 from wallsync.providers.gdrive import GoogleDriveProvider
 from wallsync.wallpaper_manager import set_wallpaper
 
-CACHE = Path.home() / ".cache" / "wallsync"
+from wallsync.config import Config
+
+config = Config()
+CACHE = config.cache_dir
 STATE = CACHE / "state.json"
 QUEUE = CACHE / "queue.json"
 QUEUE_SIZE = 3
