@@ -1,30 +1,12 @@
-import subprocess
-from pathlib import Path
+import platform
 
+if platform.system() == "Linux":
+    from .platform.linux import set_wallpaper
 
-def set_wallpaper(path: str):
-    wallpaper = Path(path).resolve()
+elif platform.system() == "Windows":
+    from .platform.windows import set_wallpaper
 
-    uri = f"file://{wallpaper}"
-
-    subprocess.run(
-        [
-            "gsettings",
-            "set",
-            "org.gnome.desktop.background",
-            "picture-uri",
-            uri,
-        ],
-        check=True,
-    )
-
-    subprocess.run(
-        [
-            "gsettings",
-            "set",
-            "org.gnome.desktop.background",
-            "picture-uri-dark",
-            uri,
-        ],
-        check=True,
+else:
+    raise NotImplementedError(
+        f"Unsupported operating system: {platform.system()}"
     )
