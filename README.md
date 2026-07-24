@@ -67,7 +67,17 @@ wallsync --help
 
 ---
 
-## Google Cloud Setup
+### Public Google Drive Links (No API Keys / Credentials Needed!)
+
+You can add any public Google Drive folder link directly to WallSync without setting up Google Cloud API keys, OAuth consent screens, or downloading `credentials.json`:
+
+```bash
+wallsync repo add "My Public Drive" gdrive_public "https://drive.google.com/drive/folders/1A2B3C4D..."
+```
+
+---
+
+## Google Cloud Setup (Optional for Private Folders)
 
 1. Create a Google Cloud project.
 2. Enable the Google Drive API.
@@ -132,6 +142,71 @@ After authentication a `token.json` file is automatically created inside:
 
 ```bash
 wallsync next
+# Preview without applying:
+wallsync next --preview
+```
+
+---
+
+### Switch to previous wallpaper
+
+```bash
+wallsync prev
+```
+
+---
+
+### Wallpaper history
+
+```bash
+wallsync history
+```
+
+---
+
+### Show detailed statistics & analytics
+
+```bash
+wallsync stats
+```
+
+---
+
+### Pause and resume timer
+
+```bash
+wallsync pause
+wallsync resume
+```
+
+---
+
+### Configuration settings
+
+```bash
+wallsync config list
+wallsync config set queue_size 5
+wallsync config set drive_folder_name "MyWallpapers"
+```
+
+---
+
+### Manage favorites and tags
+
+```bash
+wallsync favorite add
+wallsync favorite list
+wallsync tag add nature <wallpaper_id>
+```
+
+---
+
+### Sync & Cache maintenance
+
+```bash
+wallsync sync
+wallsync clean
+wallsync reset
 ```
 
 ---
@@ -194,12 +269,6 @@ wallsync uninstall
 
 ```bash
 wallsync interval 30
-```
-
-Example:
-
-```bash
-wallsync interval 60
 ```
 
 ---

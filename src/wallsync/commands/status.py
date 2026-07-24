@@ -62,7 +62,8 @@ def run():
     if active == "active":
         print(f"Status   : {GREEN}Running{RESET}")
     else:
-        print(f"Status   : {RED}Stopped{RESET}")
+        print(f"Status   : {YELLOW}Paused{RESET}")
+        print(f"           Run 'wallsync resume' to start.")
 
     if interval:
         print(f"Interval : {interval}")
